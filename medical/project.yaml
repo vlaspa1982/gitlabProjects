@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  title: CPZP Entry Test
+  description: |-
+    This document contains specification for an entry level test.
+
+  contact:
+    email: michael.zhasil@msy.cpzp.cz
+  version: 1.0.0
+servers:
+  - url: http://localhost:8082
+tags:
+  - name: Projects
+    description: Information about projects
+paths:
+  /projects:
+    get:
+      tags:
+        - Projects
+      summary: Obtain list of projects
+      operationId: getProjectList
+      parameters:
+        - name: idMode
+          in: query
+          description: Restricts retrieved ids
+          schema:
+            type: string
+            enum:
+              - ODD
+              - EVEN
+              - ALL
+            default: ALL
+        - name: limit
+          in: query
+          description: Set number of retrieved projects. Must be a positive number
+          schema:
+            type: integer
+            example: 50
+            default: 10
+        - name: orderBy
+          in: query
+          description: Sets ordering parameter
+          schema:
+            type: string
+            enum:
+              - ID
+              - NAME
+            default: ID
+        - name: sort
+          in: query
+          description: Sets sort order
+          schema:
+            type: string
+            enum:
+              - ASC
+              - DESC
+            default: DESC
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+components:
+
+  schemas:
+  
+    Project:
+      type: object
+      required:
+        - id
+        - name
+        - namespaceName
+        - path
+        - createdAt
+      properties:
+        id:
+          type: integer
+          description: "Project identifier"
+          example: 3
+        name:
+          type: string
+          description: A name of the project
+          example: MyProject
+        namespaceName:
+          type: string
+          description: Name of the project´s namespace
+          example: MyNamespace
+        path:
+          type: string
+          description: Project path without namespace
+          example: my-project
+        createdAt:
+          type: integer
+          description: Timestam when project what created
+          example: 1684240809
+          
+    ProjectList:
+      type: object
+      description: Wraper around project items
+      required:
+        - projects
+      properties:
+        projects:
+          type: array
+          description: List of projects
+          items:
+             $ref: '#/components/schemas/Project'
+ 
+    BadRequest:
+      description: Contains list of broken constraints in request.
+        It´s based on the RFC 7807 spec
+      required:
+        - title
+        - invalid-params
+      properties:
+        title:
+          type: string
+          description: Descritptive message about error contents
+          example: Your request parameters didn't validate.
+        invalid-params:
+          description: Array of invalid parameters
+          type: array
+          items:
+            $ref: '#/components/schemas/InvalidParam'
+
+    InvalidParam:
+      description: Describes details of invalid parameter
+      required:
+        - name
+        - reason
+      properties:
+        name:
+          type: string
+          description: Parameter name
+          example: limit
+        reason:
+          type: string
+          description: Parameter constraint
+          example: Must be a positive number
