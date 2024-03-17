@@ -15,12 +15,10 @@ public class GitLabService {
     private static GitLabDto transformDto(GitLabApiDto gitLabApiDto) {
         GitLabDto gitLabDto = new GitLabDto();
         
-        gitLabDto.setId(gitLabApiDto.getRoot().getId());
-//        gitLabDto.setName(gitLabApiDto.getName());
-//        gitLabDto.setNamespaceName(gitLabApiDto.getName_with_namespace());
-//        gitLabDto.setPath(gitLabApiDto.getPath());
-//        gitLabDto.setCreateAt(gitLabApiDto.getCreated_at());
-
+        gitLabDto.setId(gitLabApiDto.getId());
+        gitLabDto.setName(gitLabApiDto.getName());
+        gitLabDto.setPath(gitLabApiDto.getPath());
+        //gitLabDto.setCreateAt((gitLabApiDto.getCreated_at()));
         return gitLabDto;
     }
 }
