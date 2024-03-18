@@ -5,6 +5,24 @@ import java.util.Date;
 
 public class GitLabApiDto {
 	public int id;
+	public String description;
+	public String name;
+	public String name_with_namespace;
+	public String path;
+	public String path_with_namespace;
+	public Date created_at;
+	public String default_branch;
+	public ArrayList<Object> tag_list;
+	public ArrayList<Object> topics;
+	public String ssh_url_to_repo;
+	public String http_url_to_repo;
+	public String web_url;
+	public String readme_url;
+	public int forks_count;
+	public Object avatar_url;
+	public int star_count;
+	public Date last_activity_at;
+	public Namespace namespace;
     public int getId() {
 		return id;
 	}
@@ -119,22 +137,4 @@ public class GitLabApiDto {
 	public void setNamespace(Namespace namespace) {
 		this.namespace = namespace;
 	}
-	public String description;
-    public String name;
-    public String name_with_namespace;
-    public String path;
-    public String path_with_namespace;
-    public Date created_at;
-    public String default_branch;
-    public ArrayList<Object> tag_list;
-    public ArrayList<Object> topics;
-    public String ssh_url_to_repo;
-    public String http_url_to_repo;
-    public String web_url;
-    public String readme_url;
-    public int forks_count;
-    public Object avatar_url;
-    public int star_count;
-    public Date last_activity_at;
-    public Namespace namespace;
 }
