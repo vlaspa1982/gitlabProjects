@@ -16,12 +16,9 @@ public class GitLabController {
 	 GitLabService gitLabService;
 	 
 	@RequestMapping("/projects")
-	Collection<GitLabDto> getProjects() {
-		ArrayList<GitLabDto> dtos = new ArrayList<>();
-		for (GitLabDto dto: dtos) {
-			dtos.add(gitLabService.getProjects());
-		}
-		return dtos;
+	GitLabDto[] getProjects() {
+		GitLabDto[] gitLabDtos = gitLabService.getProjects() ;
+		return gitLabDtos;
 	}
-	
+
 }
