@@ -34,7 +34,7 @@ public class GitLabService {
         gitLabDto.setName(gitLabApiDto.getName());
         gitLabDto.setNamespaceName(gitLabApiDto.getNamespace().getName());
         gitLabDto.setPath(gitLabApiDto.getPath());
-        gitLabDto.setCreateAt((int)gitLabApiDto.getCreated_at().getYear());
+        gitLabDto.setCreateAt((int)gitLabApiDto.getCreated_at().getTime());
         return gitLabDto;
     }
 }
